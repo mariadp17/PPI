@@ -1,0 +1,132 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+
+
+
+h1 {
+    text-align: center;
+}
+
+
+
+
+#word-container {
+    margin: 20px 0;
+    font-size: 24px;
+}
+
+
+
+
+#guesses, #attempts {
+    margin-bottom: 10px;
+}
+
+
+
+
+input[type="text"] {
+    margin-right: 10px;
+    padding: 5px;
+    font-size: 16px;
+}
+
+
+
+
+button {
+    padding: 5px 10px;
+    font-size: 16px;
+}
+
+
+#hangman {
+    width: 200px;
+    height: 300px;
+    position: relative;
+}
+
+
+.gallows {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+.gallows > div {
+    background-color: #333;
+}
+
+
+.rope {
+    width: 5px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.head {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.body {
+    width: 10px;
+    height: 100px;
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.left-arm,
+.right-arm,
+.left-leg,
+.right-leg {
+    width: 50px;
+    height: 10px;
+    position: absolute;
+    background-color: #333;
+}
+
+
+.left-arm {
+    top: 160px;
+    left: 40px;
+    transform: rotate(45deg);
+}
+
+
+.right-arm {
+    top: 160px;
+    left: 110px;
+    transform: rotate(-45deg);
+}
+
+
+.left-leg {
+    top: 220px;
+    left: 40px;
+    transform: rotate(-45deg);
+}
+
+
+.right-leg {
+    top: 220px;
+    left: 110px;
+    transform: rotate(45deg);
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forca</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Jogo da Forca</h1>
+    <div id="word-container"></div>
+    <div id="guesses"></div>
+    <div id="attempts"></div>
+    <input type="text" id="letter-input" maxlength="1">
+    <button onclick="guess()">Advinhe!</button>
+    <button onclick="restart()">Recomece o jogo</button>
+
+
+    <div id="hangman">
+        <div class="gallows">
+            <div class="rope"></div>
+            <div class="head"></div>
+            <div class="body"></div>
+            <div class="left-arm"></div>
+            <div class="right-arm"></div>
+            <div class="left-leg"></div>
+            <div class="right-leg"></div>
+        </div>
+    </div>
+   
+<script>
+    const words = ["javascript", "html", "css", "python", "programacao", "tereza", "internet"];
+    let chosenWord = "";
+    let guesses = [];
+    let attempts = 5;
+    let wordInProgress = [];
+
+
+    const wordContainer = document.getElementById("word-container");
+    const guessesContainer = document.getElementById("guesses");
+    const attemptsContainer = document.getElementById("attempts");
+
+
+    function initializeGame() {
+        chosenWord = words[Math.floor(Math.random() * words.length)];
+        guesses = [];
+        attempts = 5;
+        wordInProgress = Array(chosenWord.length).fill("_");
+
+
+        displayWord();
+        displayAttempts();
+        displayGuesses();
+    }
+    function displayWord() {
+        wordContainer.textContent = wordInProgress.join(" ");
+    }
+    function displayGuesses() {
+        guessesContainer.textContent = "Tentativas: " + guesses.join(", ");
+    }
+    function displayAttempts() {
+        attemptsContainer.textContent = "Tentativas Restantes: " + attempts;
+    }
+    function checkGuess(letter) {
+        if (!guesses.includes(letter)) {
+            guesses.push(letter);
+            if (chosenWord.includes(letter)) {
+                for (let i = 0; i < chosenWord.length; i++) {
+                    if (chosenWord[i] === letter) {
+                        wordInProgress[i] = letter;
+                    }
+                }
+                displayWord();
+                if (!wordInProgress.includes("_")) {
+                    alert("Parabéns! Você ganhou!");
+                    initializeGame();
+                }
+            } else {
+                attempts--;
+                displayAttempts();
+                if (attempts === 0) {
+                    alert("Você perdeu! A palavra era: " + chosenWord);
+                    initializeGame();
+                }
+            }
+            displayGuesses();
+        }
+    }
+    function guess() {
+        const input = document.getElementById("letter-input").value.toLowerCase();
+        document.getElementById("letter-input").value = "";
+        if (input && input.length === 1 && input.match(/[a-z]/i)) {
+            checkGuess(input);
+        } else {
+            alert("Por favor, insira uma letra válida.");
+        }
+    }
+    function restart() {
+        initializeGame();
+    }
+    initializeGame();
+</script>
+</body>
+</html>
